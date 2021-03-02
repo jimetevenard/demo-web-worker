@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Démo JS : API Worker</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+    <main>
+        <h1>
+            Démo JS : API <i>Worker</i>
+        </h1>
+        <section class="intro">
+            <p>
+                Comparaison de performance et de comportement sur différentes façons de lancer
+                une fonction javascript couteuse.
+            </p>
+            <p>
+                Le test consiste à exécuter un nombre défini de fois (Cf. nombre d'itération ci-dessous)
+                une fonction d'analyse sur une chaine de caractères.
+                Cette fonction d'analyse procède au remplacement, dans la chaine de test,
+                de chaque occurrence d'une voyelle choisie aléatoirement
+                par une chaine arbitraire.
+            </p>
+            <p>
+                Trois modes d'exécution sont mis en œuvre :
+            <ul>
+                <li>Lancement direct par une boucle</li>
+                <li>Lancement par lots différés via <span class="robot">setInterval()</span></li>
+                <li>
+                    Lancement via un <a
+                        href="https://developer.mozilla.org/fr/docs/Web/API/Web_Workers_API/Using_web_workers">Web
+                        Worker</a>
+                </li>
+            </ul>
+            </p>
+        </section>
+        <section>
+            <h2>Résultat</h2>
+            <p id="status">
+                Les résultats apparaitront ici.
+            </p>
+        </section>
+        <section>
+            <h2>Exécuter</h2>
+            <button class="launch" data-methode="hard">
+                En une fois
+            </button>
+            <button class="launch" data-methode="soft">
+                En différant les run (par lots)
+            </button>
+            <button class="launch" data-methode="worker">
+                Via un worker
+            </button>
+
+            <h3 class="stick-bottom">Paramètres</h3>
+            <div class="input">
+                <label for="iterations">Nombre d'iterations : </label>
+                <select name="iterations" id="iterations-select">
+                    <option value="1000000">Un million</option>
+                    <option value="2000000">Deux million</option>
+                    <option value="10000000">Dix millions</option>
+                </select>
+            </div>
+            <div class="input">
+                <label for="lot">Taille des lots (découpage) : </label>
+                <select name="lot" id="lot-select">
+                    <option value="10000">Dix-mille</option>
+                    <option value="100000">Cent-mille</option>
+                </select>
+            </div>
+
+
+        </section>
+        <section>
+            <h2>Chaine de test</h2>
+            <div id="chaine-test" class="robot" contenteditable="true">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse fermentum aliquet suscipit.
+                Aliquam enim dolor, mattis laoreet felis ac, fermentum ultricies tellus. Integer aliquam
+                ullamcorper ullamcorper. Curabitur dolor libero, fringilla vitae massa ac, elementum consequat
+                nisl. Quisque convallis ipsum sit amet vehicula tincidunt. Donec at efficitur est. Ut faucibus
+                ugue risus, in tincidunt ligula fermentum non.
+            </div>
+        </section>
+    </main>
+    <!-- include scripts -->
+    <!-- =============== -->
+
+    <!-- init -->
+    <script src="js/main_init.js"></script>
+    <script src="js/main_test_function.js"></script>
+
+    <!-- launch scenarios -->
+    <script src="js/launch_direct.js"></script>
+    <script src="js/launch_timeout.js"></script>
+    <script src="js/launch_worker.js"></script>
+
+</body>
+
+</html>
