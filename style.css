@@ -1,5 +1,5 @@
 
-section:hover {
+section:hover, section:active {
     /* Pour tester la réactivité du navigateur */
     border-left-color: red;
     background-color: rgb(231, 231, 231);
