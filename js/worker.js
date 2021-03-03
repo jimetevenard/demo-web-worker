@@ -8,13 +8,30 @@ function analyse(string) {
     return string.replaceAll(randomLetter(), 'yop');
 }
 
-onmessage = function(e){
-    postMessage('[Worker] : traitement en cours...');
+var busy = false;
 
-    let rep, i;
-    for(i = 0; i < e.data.nbItarations; i++){
-        rep = analyse(e.data.string);
+onmessage = function(e){
+    if(busy) return;
+
+    let rep, i, progressInterval = 100000;
+    busy = true;
+
+    try {
+        postMessage('[Worker] : traitement en cours...');
+
+
+        for(i = 0; i < e.data.nbItarations; i++){
+            rep = analyse(e.data.string);
+
+            // On envoie un feed back toutes les ${progressInterval} itérations
+            if(i % progressInterval == 0){
+                postMessage(`[Worker] : En cours, ${i} éléments traités sur ${e.data.nbItarations}`);
+            }   
+        }
+    
+        postMessage(`[Worker] : ${i} éléments traités, Terminé !`);
+    } finally {
+        busy = false;
     }
 
-    postMessage(`[Worker] : ${i} éléments traités ! rep.length ${rep.length}`);
 }
