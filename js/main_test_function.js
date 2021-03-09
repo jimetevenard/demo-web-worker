@@ -14,7 +14,7 @@ function analyse() {
     return lorem.replaceAll(randomLetter, 'yop');
 }
 
-function display(indice, total) {
+function display(indice, total, temps) {
     let s = document.querySelector('#status');
-    s.innerHTML = `RUN ${totalRuns} : ${indice} traités sur ${total}`;
+    s.innerHTML = `RUN ${totalRuns} : ${indice} traités sur ${total} en ${temps} ms.`;
 }

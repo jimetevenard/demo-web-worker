@@ -13,7 +13,7 @@ var busy = false;
 onmessage = function(e){
     if(busy) return;
 
-    let rep, i, progressInterval = 100000;
+    let rep, i, progressInterval = 100000, timestampStart = Date.now();
     busy = true;
 
     try {
@@ -29,7 +29,7 @@ onmessage = function(e){
             }   
         }
     
-        postMessage(`[Worker] : ${i} éléments traités, Terminé !`);
+        postMessage(`[Worker] : ${i} éléments traités, Terminé ! en ${Date.now() - timestampStart} ms`);
     } finally {
         busy = false;
     }

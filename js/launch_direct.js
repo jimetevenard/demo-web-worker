@@ -8,9 +8,9 @@
     Et le message "Page bloquée" peut même apparaitre.
 */
 function runAnalyse(s) {
-    let i;
+    let i, timestampStart = Date.now();
     for (i = 0; i < nb; i++) {
         analyse();
     }
-    display(i, nb);
+    display(i, nb, Date.now() - timestampStart);
 }

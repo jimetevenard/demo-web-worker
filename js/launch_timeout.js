@@ -10,14 +10,14 @@
     mais si les lots sont trop gros, on risque des "mini-freeze" assez genants.
 */
 function runAnalyseAsync(s) {
-    let i = 0;
+    let i = 0, timestampStart = Date.now();
 
     let runGroup = function () {
         for (let j = 0; j < decoupage && i < nb; j++) {
             analyse();
             i++;
         }
-        display(i, nb);
+        display(i, nb, Date.now() - timestampStart);
     }
     let interval = setInterval(function () {
         if (i < nb) {
